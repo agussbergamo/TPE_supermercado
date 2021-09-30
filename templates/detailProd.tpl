@@ -1,0 +1,14 @@
+{include file="templates/header.tpl"}
+
+<h2>Detalle de producto</h2>
+<ul>
+    <li> Producto: {$product->nom_prod}</li>
+    <li> Categoría: {$product->nom_cat}</li>
+    <li> Marca: {$product->marca}</li>
+    <li> Peso: {$product->peso} {$product->unidad_medida}</li>
+    <li> Precio: {$product->precio}</li>
+</ul>
+
+<a href="home"> Volver </a>
+
+{include file="templates/footer.tpl"}
