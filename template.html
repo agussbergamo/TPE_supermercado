@@ -1,9 +1,30 @@
 
 
-<form action="route.php">
-    <input type="text" placeholder="Nombre de usuario">
-    <input type="text" placeholder="Contraseña">
-
-
-
+<form action="editProd" method="post">
+    <input type="text" placeholder="Producto">
+    <input type="text" placeholder="Marca">
+    <input type="number" placeholder="Peso">
+    <select name="peso" id="peso">
+        <option value="gr">Gramos</option>
+        <option value="ml">Mililitros</option>
+    </select>
+    <input type="number" placeholder="Precio">
+    <select name="peso" id="peso">
+        <option value="1">Almacén</option>
+        <option value="2">Lácteos</option>
+        <option value="3">Bebidas</option>
+        <option value="4">Limpieza</option>
+        <option value="5">Congelados</option>
+        <option value="6">Perfumería</option>
+    </select>
+    <input type="submit">Guardar
 </form>
+    
+    <input type="text" placeholder="Producto">
+
+    <input type="text" placeholder="Contraseña">
+    <input type="button">Editar
+    <input type="button">Borrar
+
+
+

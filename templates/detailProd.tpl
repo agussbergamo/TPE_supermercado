@@ -9,6 +9,6 @@
     <li> Precio: {$product->precio}</li>
 </ul>
 
-<a href="home"> Volver </a>
+<a href="listProd"> Volver </a>
 
 {include file="templates/footer.tpl"}

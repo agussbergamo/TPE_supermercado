@@ -19,21 +19,13 @@ class ProdView {
     }
 
     function showProduct($product) {
-        $this->smarty->assign("product", $product);
+       $this->smarty->assign("product", $product);
         $this->smarty->display("templates/detailProd.tpl");
     }
 
-    function showCategories ($categories) {
-        $this->smarty->assign("title", "Lista de categorías");
-        $this->smarty->assign("categories", $categories);
-        $this->smarty->display("templates/listCat.tpl");
+    function showProductEdit($product) {
+        $this->smarty->assign("product", $product);
+        $this->smarty->display("templates/detailProdEdit.tpl");
     }
-
-    function showCategory($category, $nom_cat) {
-        $this->smarty->assign("title", $nom_cat);         
-        $this->smarty->assign("category", $category); 
-        $this->smarty->display("templates/detailCat.tpl");
-    }
-
 
 }
