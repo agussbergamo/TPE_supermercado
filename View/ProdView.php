@@ -7,14 +7,11 @@ class ProdView {
     function __construct(){
         $this->smarty = new Smarty();    
     }
-
-    function showHome () {
-        $this->smarty->display("templates/home.tpl");
-    }
-
-    function showProducts ($products) {
+    
+    function showProducts ($products, $categories) {
         $this->smarty->assign("title", "Lista de productos");
         $this->smarty->assign("products", $products);
+        $this->smarty->assign("categories", $categories);
         $this->smarty->display("templates/listProd.tpl");
     }
 
@@ -23,8 +20,9 @@ class ProdView {
         $this->smarty->display("templates/detailProd.tpl");
     }
 
-    function showProductEdit($product) {
+    function showProductEdit($product, $categories) {
         $this->smarty->assign("product", $product);
+        $this->smarty->assign("categories", $categories);
         $this->smarty->display("templates/detailProdEdit.tpl");
     }
 

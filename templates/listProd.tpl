@@ -12,7 +12,7 @@
 {/foreach}
 </ul>
 
-<h1>Formulario producto</h1>
+<h1>Agregar producto</h1>
 <form action="addProd" method="post">
     <input type="text" placeholder="Producto" name="nom_prod" required>
     <input type="text" placeholder="Marca" name="marca" required>
@@ -23,12 +23,9 @@
     </select>
     <input type="number" placeholder="Precio" name="precio" required>
     <select name="id_cat" required>
-        <option value="1">Almacén</option>
-        <option value="2">Lácteos</option>
-        <option value="3">Bebidas</option>
-        <option value="4">Limpieza</option>
-        <option value="5">Congelados</option>
-        <option value="6">Perfumería</option>
+        {foreach from=$categories item=$category}
+            <option value="{$category->id_cat}">{$category->nom_cat}</option>
+        {/foreach})
     </select>
     <input type="submit">
 </form>

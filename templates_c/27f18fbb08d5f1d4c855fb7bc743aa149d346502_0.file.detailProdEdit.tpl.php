@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2021-10-06 20:03:08
+/* Smarty version 3.1.39, created on 2021-10-14 03:33:28
   from 'C:\xampp\htdocs\web2\TPE_supermercado\templates\detailProdEdit.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_615de4dc8b9c86_85146876',
+  'unifunc' => 'content_616788e8a856b8_44283008',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '27f18fbb08d5f1d4c855fb7bc743aa149d346502' => 
     array (
       0 => 'C:\\xampp\\htdocs\\web2\\TPE_supermercado\\templates\\detailProdEdit.tpl',
-      1 => 1633543373,
+      1 => 1634167547,
       2 => 'file',
     ),
   ),
@@ -22,40 +22,51 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:templates/footer.tpl' => 1,
   ),
 ),false)) {
-function content_615de4dc8b9c86_85146876 (Smarty_Internal_Template $_smarty_tpl) {
+function content_616788e8a856b8_44283008 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:templates/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
-<h2>Detalle de producto</h2>
+<h2>Modificar producto</h2>
 
-<form action="submitEdit/<?php echo $_smarty_tpl->tpl_vars['product']->value->id_prod;?>
+<form action="submitEditProd/<?php echo $_smarty_tpl->tpl_vars['product']->value->id_prod;?>
 " method="post">
     <ul>
         <li> Producto: <?php echo $_smarty_tpl->tpl_vars['product']->value->nom_prod;?>
-</li><input type="text" placeholder="Producto" name="nom_prod" required>
+</li><input type="text" placeholder="Producto" name="nom_prod" value="<?php echo $_smarty_tpl->tpl_vars['product']->value->nom_prod;?>
+" required>
         <li> Categoría: <?php echo $_smarty_tpl->tpl_vars['product']->value->nom_cat;?>
 </li><select name="id_cat" required>
-                                                    <option value="1">Almacén</option>
-                                                    <option value="2">Lácteos</option>
-                                                    <option value="3">Bebidas</option>
-                                                    <option value="4">Limpieza</option>
-                                                    <option value="5">Congelados</option>
-                                                    <option value="6">Perfumería</option>
-                                                </select>    
+                                                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['categories']->value, 'category');
+$_smarty_tpl->tpl_vars['category']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['category']->value) {
+$_smarty_tpl->tpl_vars['category']->do_else = false;
+?>
+                                                        <option value="<?php echo $_smarty_tpl->tpl_vars['category']->value->id_cat;?>
+" <?php if ($_smarty_tpl->tpl_vars['product']->value->id_cat == $_smarty_tpl->tpl_vars['category']->value->id_cat) {?> selected <?php }?>><?php echo $_smarty_tpl->tpl_vars['category']->value->nom_cat;?>
+</option>
+                                                    <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>)
+                                                </select>                                            
         <li> Marca: <?php echo $_smarty_tpl->tpl_vars['product']->value->marca;?>
-</li><input type="text" placeholder="Marca" name="marca" required>
+</li><input type="text" placeholder="Marca" name="marca" value="<?php echo $_smarty_tpl->tpl_vars['product']->value->marca;?>
+" required>
         <li> Peso: <?php echo $_smarty_tpl->tpl_vars['product']->value->peso;?>
-</li><input type="number" placeholder="Peso" name="peso" required>
+</li><input type="number" placeholder="Peso" name="peso" value="<?php echo $_smarty_tpl->tpl_vars['product']->value->peso;?>
+" required>
         <li> Unidad de medida:<?php echo $_smarty_tpl->tpl_vars['product']->value->unidad_medida;?>
 </li><select name="unidad_medida" required>
-                                                                <option value="gr">Gramos</option>
-                                                                <option value="ml">Mililitros</option>
+                                                                <option value="gr" <?php if ("gr" == $_smarty_tpl->tpl_vars['product']->value->unidad_medida) {?> selected <?php }?>>Gramos</option>
+                                                                <option value="ml" <?php if ("ml" == $_smarty_tpl->tpl_vars['product']->value->unidad_medida) {?> selected <?php }?>>Mililitros</option>
                                                             </select>
         <li> Precio: <?php echo $_smarty_tpl->tpl_vars['product']->value->precio;?>
-</li><input type="number" placeholder="Precio" name="precio" required>
+</li><input type="number" placeholder="Precio" name="precio" value="<?php echo $_smarty_tpl->tpl_vars['product']->value->precio;?>
+" required>
     </ul>
     <input type="submit">
 </form>
+
 
 <a href="listProd"> Volver </a>
 

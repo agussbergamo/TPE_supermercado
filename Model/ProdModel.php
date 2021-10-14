@@ -38,14 +38,11 @@ class ProdModel {
                                         FROM producto 
                                         WHERE id_prod = ?");
         $query -> execute(array($id));
-        $product = $query->fetch(PDO::FETCH_OBJ);
-        return $product; 
     }
 
-    function submitEdit($id) {
+    function submitEditProd($id) {
         $query = $this-> db -> prepare("UPDATE producto SET nom_prod = ?, marca = ?, peso = ?, unidad_medida = ?, precio = ?, id_cat = ? WHERE id_prod =$id");
         $query -> execute(array($_POST["nom_prod"], $_POST["marca"], $_POST["peso"], $_POST["unidad_medida"], $_POST["precio"], $_POST["id_cat"]));
-        $query->fetch(PDO::FETCH_OBJ);
     }
 
 

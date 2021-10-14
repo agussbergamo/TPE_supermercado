@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2021-10-06 19:38:16
+/* Smarty version 3.1.39, created on 2021-10-14 02:54:27
   from 'C:\xampp\htdocs\web2\TPE_supermercado\templates\listProd.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_615ddf086ab0e4_46066118',
+  'unifunc' => 'content_61677fc37529e9_05197943',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '56bf23247cd660fcc2ded165252572dedfa653f5' => 
     array (
       0 => 'C:\\xampp\\htdocs\\web2\\TPE_supermercado\\templates\\listProd.tpl',
-      1 => 1633540700,
+      1 => 1634167524,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:templates/footer.tpl' => 1,
   ),
 ),false)) {
-function content_615ddf086ab0e4_46066118 (Smarty_Internal_Template $_smarty_tpl) {
+function content_61677fc37529e9_05197943 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:templates/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -51,7 +51,7 @@ $_smarty_tpl->tpl_vars['product']->do_else = false;
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </ul>
 
-<h1>Formulario producto</h1>
+<h1>Agregar producto</h1>
 <form action="addProd" method="post">
     <input type="text" placeholder="Producto" name="nom_prod" required>
     <input type="text" placeholder="Marca" name="marca" required>
@@ -62,12 +62,18 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     </select>
     <input type="number" placeholder="Precio" name="precio" required>
     <select name="id_cat" required>
-        <option value="1">Almacén</option>
-        <option value="2">Lácteos</option>
-        <option value="3">Bebidas</option>
-        <option value="4">Limpieza</option>
-        <option value="5">Congelados</option>
-        <option value="6">Perfumería</option>
+        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['categories']->value, 'category');
+$_smarty_tpl->tpl_vars['category']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['category']->value) {
+$_smarty_tpl->tpl_vars['category']->do_else = false;
+?>
+            <option value="<?php echo $_smarty_tpl->tpl_vars['category']->value->id_cat;?>
+"><?php echo $_smarty_tpl->tpl_vars['category']->value->nom_cat;?>
+</option>
+        <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>)
     </select>
     <input type="submit">
 </form>
