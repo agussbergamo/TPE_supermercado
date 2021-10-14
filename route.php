@@ -4,9 +4,9 @@ require_once "Controller/CatController.php";
 require_once "Controller/LoginController.php";
 require_once "Controller/HomeController.php";
 
-define ('BASE_URL', '//'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].dirname($_SERVER['PHP_SELF']).'/');
+define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
- if (!empty($_GET['action'])) {
+if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 } else {
     $action = 'home';
@@ -20,7 +20,7 @@ $loginController = new LoginController();
 $homeController = new HomeController();
 
 
-switch($params[0]) {
+switch ($params[0]) {
     case 'home':
         $homeController->showHome();
         break;
@@ -32,7 +32,7 @@ switch($params[0]) {
         break;
     case 'addProd':
         $prodController->addProd();
-        break; 
+        break;
     case 'deleteProd':
         $prodController->deleteProd($params[1]);
         break;
@@ -50,7 +50,7 @@ switch($params[0]) {
         break;
     case 'addCat':
         $catController->addCat();
-        break; 
+        break;
     case 'deleteCat':
         $catController->deleteCat($params[1]);
         break;
@@ -69,7 +69,7 @@ switch($params[0]) {
     case 'logout':
         $loginController->logout($params[1]);
         break;
-        default:
-    echo('404 page not found');
-    break;
+    default:
+        echo ('404 page not found');
+        break;
 }

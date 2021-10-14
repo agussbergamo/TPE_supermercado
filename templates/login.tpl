@@ -1,7 +1,7 @@
 {include file="templates/header.tpl"}
 
 
-<h1>{$title}</h1>
+<h2>{$title}</h2>
 
 <form action="verify" method="post">
   <div class="mb-3">

@@ -10,13 +10,14 @@ class ProdController
 
     private $model;
     private $view;
-    private $authHelper; 
+    private $catModel;
+    private $authHelper;
 
     function __construct()
     {
         $this->model = new ProdModel();
-        $this->catModel = new CatModel();
         $this->view = new ProdView();
+        $this->catModel = new CatModel();
         $this->authHelper = new AuthHelper();
     }
 
@@ -41,14 +42,14 @@ class ProdController
             && !empty($_POST["precio"]) && !empty($_POST["id_cat"])
         )
             $this->model->addProduct($_POST["nom_prod"], $_POST["marca"], $_POST["peso"], $_POST["unidad_medida"], $_POST["precio"], $_POST["id_cat"]);
-        $this->listProd();
+        header("Location: " . BASE_URL . "listProd");
     }
 
     function deleteProd($id)
     {
         $this->authHelper->checkLoggedIn();
         $this->model->deleteProduct($id);
-        $this->listProd();
+        header("Location: " . BASE_URL . "listProd");
     }
 
     function editProd($id)
@@ -67,6 +68,6 @@ class ProdController
             && !empty($_POST["precio"]) && !empty($_POST["id_cat"])
         )
             $this->model->submitEditProd($id, $_POST["nom_prod"], $_POST["marca"], $_POST["peso"], $_POST["unidad_medida"], $_POST["precio"], $_POST["id_cat"]);
-        $this->listProd();
+        header("Location: " . BASE_URL . "listProd");
     }
 }

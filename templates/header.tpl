@@ -9,16 +9,17 @@
     <title>Supermercado</title>
 </head>
 
-<body>
-<div class="container">
-    <h1>Supermercado</h1>
-    <nav >
-        <div class= "row">
-            <a href="home/" class="btn btn-primary" >Home</a>
-            <a href="listProd/" class="btn btn-primary">Productos</a>
-            <a href="listCat/" class="btn btn-primary">Categorías</a>
-            <a href="login/" class="btn btn-primary">Login</a>
-            <a href="logout/" class="btn btn-primary">Logout</a>
-        </div>
-    </nav>
-</div>
+<body class="bg-primary p-2 text-black bg-opacity-50">
+
+    <div class="container">
+        <nav>
+            <div class= "row">
+                <div class="col-7"><h1>Supermercado</h1></div>
+                <div class="col"><a href="home/" class="btn btn-outline-primary" >Home</a></div>
+                <div class="col"><a href="listProd/" class="btn btn-outline-primary">Productos</a></div>
+                <div class="col"><a href="listCat/" class="btn btn-outline-primary">Categorías</a></div>
+                <div class="col"><a href="login/" class="btn btn-outline-primary">Login</a></div>
+                <div class="col"><a href="logout/" class="btn btn-outline-primary">Logout</a></div>
+            </div>
+        </nav>
+    </div>

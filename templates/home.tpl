@@ -1,7 +1,10 @@
 {include file="templates/header.tpl"}
 
-<h1>Bienvenido!</h1>
 
-<img src="images/supermercado.jpg" class="img-fluid" alt="...">
+<div class="container">
+    <div class="row justify-content-center">
+    <h1 class="text-center">{$title}</h1> 
+    </div>
+</div>
 
 {include file="templates/footer.tpl"}

@@ -10,7 +10,7 @@ class CatController
 
     private $model;
     private $view;
-    private $authHelper; 
+    private $authHelper;
 
     function __construct()
     {
@@ -34,16 +34,16 @@ class CatController
     function addCat()
     {
         $this->authHelper->checkLoggedIn();
-        if (!empty($_POST["nom_cat"]) && !empty($_POST["refrig"]))
+        if (isset($_POST["nom_cat"]) && isset($_POST["refrig"]))
             $this->model->addCat($_POST["nom_cat"], $_POST["refrig"]);
-        $this->listCat();
+        header("Location: " . BASE_URL . "listCat");
     }
 
     function deleteCat($id)
     {
         $this->authHelper->checkLoggedIn();
         $this->model->deleteCategory($id);
-        $this->listCat();
+        header("Location: " . BASE_URL . "listCat");
     }
 
     function editCat($id_cat)
@@ -58,7 +58,6 @@ class CatController
         $this->authHelper->checkLoggedIn();
         if (isset($_POST["nom_cat"]) && isset($_POST["refrig"]))
             $this->model->submitEditCat($id, $_POST["nom_cat"], $_POST["refrig"]);
-        //$this->listCat();
-        header("Location: ".BASE_URL."listCat");
+        header("Location: " . BASE_URL . "listCat");
     }
 }

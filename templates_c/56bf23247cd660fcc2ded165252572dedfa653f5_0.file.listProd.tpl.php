@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2021-10-14 02:54:27
+/* Smarty version 3.1.39, created on 2021-10-15 00:05:39
   from 'C:\xampp\htdocs\web2\TPE_supermercado\templates\listProd.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_61677fc37529e9_05197943',
+  'unifunc' => 'content_6168a9b3b36a74_34628786',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '56bf23247cd660fcc2ded165252572dedfa653f5' => 
     array (
       0 => 'C:\\xampp\\htdocs\\web2\\TPE_supermercado\\templates\\listProd.tpl',
-      1 => 1634167524,
+      1 => 1634249136,
       2 => 'file',
     ),
   ),
@@ -22,12 +22,12 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:templates/footer.tpl' => 1,
   ),
 ),false)) {
-function content_61677fc37529e9_05197943 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6168a9b3b36a74_34628786 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:templates/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
-<h1> <?php echo $_smarty_tpl->tpl_vars['title']->value;?>
- </h1>
+<h2> <?php echo $_smarty_tpl->tpl_vars['title']->value;?>
+ </h2>
 
 <ul>
 <?php
@@ -37,13 +37,13 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['product']->value
 $_smarty_tpl->tpl_vars['product']->do_else = false;
 ?>
     <li>
-        <a href="viewProd/<?php echo $_smarty_tpl->tpl_vars['product']->value->id_prod;?>
+        <a class=fs-4 href="viewProd/<?php echo $_smarty_tpl->tpl_vars['product']->value->id_prod;?>
 "><?php echo $_smarty_tpl->tpl_vars['product']->value->nom_prod;?>
-</a> --> <?php echo $_smarty_tpl->tpl_vars['product']->value->nom_cat;?>
+</a> | Categoría: <?php echo $_smarty_tpl->tpl_vars['product']->value->nom_cat;?>
 
-        <a href="deleteProd/<?php echo $_smarty_tpl->tpl_vars['product']->value->id_prod;?>
+        <a class="btn btn-outline-danger" href="deleteProd/<?php echo $_smarty_tpl->tpl_vars['product']->value->id_prod;?>
 ">Borrar</a>
-        <a href="editProd/<?php echo $_smarty_tpl->tpl_vars['product']->value->id_prod;?>
+        <a class="btn btn-outline-secondary" href="editProd/<?php echo $_smarty_tpl->tpl_vars['product']->value->id_prod;?>
 ">Editar</a>
     </li>
 <?php
@@ -51,17 +51,17 @@ $_smarty_tpl->tpl_vars['product']->do_else = false;
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </ul>
 
-<h1>Agregar producto</h1>
+<h3>Agregar producto</h3>
 <form action="addProd" method="post">
-    <input type="text" placeholder="Producto" name="nom_prod" required>
-    <input type="text" placeholder="Marca" name="marca" required>
-    <input type="number" placeholder="Peso" name="peso" required>
-    <select name="unidad_medida" required>
+    <input type="text" placeholder="Producto" name="nom_prod" required class="form-control form-control-lg">
+    <input type="text" placeholder="Marca" name="marca" required class="form-control form-control-lg">
+    <input type="number" placeholder="Peso" name="peso" required class="form-control form-control-lg">
+    <select name="unidad_medida" required class="form-control form-control-lg">
         <option value="gr">Gramos</option>
         <option value="ml">Mililitros</option>
     </select>
-    <input type="number" placeholder="Precio" name="precio" required>
-    <select name="id_cat" required>
+    <input type="number" placeholder="Precio" name="precio" required class="form-control form-control-lg">
+    <select name="id_cat" required class="form-control form-control-lg">
         <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['categories']->value, 'category');
 $_smarty_tpl->tpl_vars['category']->do_else = true;
@@ -75,7 +75,7 @@ $_smarty_tpl->tpl_vars['category']->do_else = false;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>)
     </select>
-    <input type="submit">
+    <input type="submit" class="btn btn-primary">
 </form>
 
 <?php $_smarty_tpl->_subTemplateRender("file:templates/footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
