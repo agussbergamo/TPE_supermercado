@@ -10,10 +10,11 @@ class CatView
         $this->smarty = new Smarty();
     }
 
-    function showCategories($categories)
+    function showCategories($categories, $logged)
     {
         $this->smarty->assign("title", "Lista de categorías");
         $this->smarty->assign("categories", $categories);
+        $this->smarty->assign("logged", $logged);
         $this->smarty->display("templates/listCat.tpl");
     }
 

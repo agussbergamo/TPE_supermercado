@@ -1,22 +1,30 @@
 <?php
 require_once "Model/LoginModel.php";
 require_once "View/LoginView.php";
+require_once "Helpers/AuthHelper.php";
 
 class LoginController
 {
 
     private $model;
     private $view;
+    private $authHelper;
 
     function __construct()
     {
         $this->model = new LoginModel();
         $this->view = new LoginView();
+        $this->authHelper = new AuthHelper();
     }
 
     function login()
     {
-        $this->view->showLogin();
+        $logged = $this->authHelper->checkLoggedIn();
+        if($logged == true){
+            $this->view->showLogin("Estás logueado!", $logged);            
+        } else {
+            $this->view->showLogin("Logueate por favor", $logged);        
+        }
     }
 
     function verifyLogin()
@@ -34,7 +42,7 @@ class LoginController
 
                 header("Location: " . BASE_URL . "listProd");
             } else {
-                $this->view->showLogin("Acceso denegado");
+                $this->view->showLogin("Acceso denegado", false);
             }
         }
     }
@@ -43,6 +51,6 @@ class LoginController
     {
         session_start();
         session_destroy();
-        $this->view->showLogin("Te deslogueaste!");
+        header("Location: " . BASE_URL . "login");
     }
 }

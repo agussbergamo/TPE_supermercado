@@ -10,8 +10,11 @@ class AuthHelper
     function checkLoggedIn()
     {
         session_start();
-        if (!isset($_SESSION["usuario"])) {
-            header("Location: " . BASE_URL . "login");
+        if (isset($_SESSION["usuario"])) {
+            return true;  
+        } else {
+            return false; 
         }
     }
+
 }

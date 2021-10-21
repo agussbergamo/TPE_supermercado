@@ -10,11 +10,12 @@ class ProdView
         $this->smarty = new Smarty();
     }
 
-    function showProducts($products, $categories)
+    function showProducts($products, $categories, $logged)
     {
         $this->smarty->assign("title", "Lista de productos");
         $this->smarty->assign("products", $products);
         $this->smarty->assign("categories", $categories);
+        $this->smarty->assign("logged", $logged);
         $this->smarty->display("templates/listProd.tpl");
     }
 

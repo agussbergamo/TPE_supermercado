@@ -21,8 +21,9 @@ class CatController
 
     function listCat()
     {
+        $logged = $this->authHelper->checkLoggedIn();
         $categories = $this->model->getCategories();
-        $this->view->showCategories($categories);
+        $this->view->showCategories($categories, $logged);
     }
 
     function viewCat($nom_cat)
@@ -33,31 +34,49 @@ class CatController
 
     function addCat()
     {
-        $this->authHelper->checkLoggedIn();
-        if (isset($_POST["nom_cat"]) && isset($_POST["refrig"]))
-            $this->model->addCat($_POST["nom_cat"], $_POST["refrig"]);
-        header("Location: " . BASE_URL . "listCat");
+        $logged = $this->authHelper->checkLoggedIn();
+        if ($logged == true) {
+            if (isset($_POST["nom_cat"]) && isset($_POST["refrig"])) {
+                $this->model->addCat($_POST["nom_cat"], $_POST["refrig"]);
+            }
+            header("Location: " . BASE_URL . "listCat");
+        } else {
+            header("Location: " . BASE_URL . "home");
+        }
     }
 
     function deleteCat($id)
     {
-        $this->authHelper->checkLoggedIn();
-        $this->model->deleteCategory($id);
-        header("Location: " . BASE_URL . "listCat");
+        $logged = $this->authHelper->checkLoggedIn();
+        if ($logged == true) {
+            $this->model->deleteCategory($id);
+            header("Location: " . BASE_URL . "listCat");
+        } else {
+            header("Location: " . BASE_URL . "home");
+        }
     }
 
     function editCat($id_cat)
     {
-        $this->authHelper->checkLoggedIn();
-        $categoryFields = $this->model->getCategoryFields($id_cat);
-        $this->view->showCategoryEdit($categoryFields);
+        $logged = $this->authHelper->checkLoggedIn();
+        if ($logged == true) {
+            $categoryFields = $this->model->getCategoryFields($id_cat);
+            $this->view->showCategoryEdit($categoryFields);
+        } else {
+            header("Location: " . BASE_URL . "home");
+        }
     }
 
     function submitEditCat($id)
     {
-        $this->authHelper->checkLoggedIn();
-        if (isset($_POST["nom_cat"]) && isset($_POST["refrig"]))
-            $this->model->submitEditCat($id, $_POST["nom_cat"], $_POST["refrig"]);
-        header("Location: " . BASE_URL . "listCat");
+        $logged = $this->authHelper->checkLoggedIn();
+        if ($logged == true) {
+            if (isset($_POST["nom_cat"]) && isset($_POST["refrig"])) {
+                $this->model->submitEditCat($id, $_POST["nom_cat"], $_POST["refrig"]);
+            }
+            header("Location: " . BASE_URL . "listCat");
+        } else {
+            header("Location: " . BASE_URL . "home");
+        }
     }
 }
