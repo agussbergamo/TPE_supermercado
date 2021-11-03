@@ -11,4 +11,9 @@
 
 <a href="listProd" class="btn btn-outline-primary"> Volver </a>
 
+<div id="app">
+    {include file="templates/vue/comments.tpl"}
+</div>
+
+<script src="js/commentsCSR.js"></script>
 {include file="templates/footer.tpl"}

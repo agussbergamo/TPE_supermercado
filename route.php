@@ -3,6 +3,7 @@ require_once "Controller/ProdController.php";
 require_once "Controller/CatController.php";
 require_once "Controller/LoginController.php";
 require_once "Controller/HomeController.php";
+require_once "Controller/CommController.php";
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
@@ -18,6 +19,7 @@ $prodController = new ProdController();
 $catController = new CatController();
 $loginController = new LoginController();
 $homeController = new HomeController();
+$commController = new CommController();
 
 
 switch ($params[0]) {
@@ -59,7 +61,7 @@ switch ($params[0]) {
         break;
     case 'submitEditCat':
         $catController->submitEditCat($params[1]);
-        break;
+        break;    
     case 'login':
         $loginController->login();
         break;
