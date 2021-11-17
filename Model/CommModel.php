@@ -12,10 +12,10 @@ class CommModel
 
     function getComments($id_producto)
     {
-        $query = $this->db->prepare("SELECT * FROM comentarios LEFT JOIN usuario
+        $query = $this->db->prepare("SELECT comentarios.*, usuario.usuario FROM comentarios LEFT JOIN usuario
                                     ON comentarios.id_usuario = usuario.id_usuario
                                     WHERE id_producto = ?");
-        $query->execute($id_producto);
+        $query->execute(array($id_producto));
         $comentarios = $query->fetchAll(PDO::FETCH_OBJ);
         return $comentarios;
     }

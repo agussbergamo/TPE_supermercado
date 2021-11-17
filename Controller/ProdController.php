@@ -24,6 +24,7 @@ class ProdController
     function listProd()
     {
         $logged = $this->authHelper->checkLoggedIn();
+        //$role = $this->authHelper->getRole();
         $products = $this->model->getProducts();
         $categories = $this->catModel->getCategories();
         $this->view->showProducts($products, $categories, $logged);
@@ -31,14 +32,15 @@ class ProdController
 
     function viewProd($id)
     {
+        $logged = $this->authHelper->checkLoggedIn();
         $product = $this->model->getProduct($id);
-        $this->view->showProduct($product);
+        $this->view->showProduct($product, $logged);
     }
 
     function addProd()
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == true) {
+        if ($logged == "admin") {
             if (
                 !empty($_POST["nom_prod"]) && !empty($_POST["marca"]) && !empty($_POST["peso"]) && !empty($_POST["unidad_medida"])
                 && !empty($_POST["precio"]) && !empty($_POST["id_cat"])
@@ -54,7 +56,7 @@ class ProdController
     function deleteProd($id)
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == true) {
+        if ($logged == "admin") {
             $this->model->deleteProduct($id);
             header("Location: " . BASE_URL . "listProd");
         } else {
@@ -65,7 +67,7 @@ class ProdController
     function editProd($id)
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == true) {
+        if ($logged == "admin") {
             $product = $this->model->getProduct($id);
             $categories = $this->catModel->getCategories();
             $this->view->showProductEdit($product, $categories);
@@ -77,7 +79,7 @@ class ProdController
     function submitEditProd($id)
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == true) {
+        if ($logged == "admin") {
             if (
                 !empty($_POST["nom_prod"]) && !empty($_POST["marca"]) && !empty($_POST["peso"]) && !empty($_POST["unidad_medida"])
                 && !empty($_POST["precio"]) && !empty($_POST["id_cat"])

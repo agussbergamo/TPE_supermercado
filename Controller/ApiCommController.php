@@ -2,7 +2,7 @@
 require_once "Model/CommModel.php";
 require_once "View/ApiView.php";
 
-class ApiController
+class ApiCommController
 {
     private $model;
     private $view;
@@ -13,9 +13,10 @@ class ApiController
         $this->view = new APIView();
     }
 
-    function getComments()
+    function getComments($params = null)
     {
-        $comentarios = $this->model->getComments(6);
+        $id_producto = $params[":ID"];
+        $comentarios = $this->model->getComments($id_producto);
         return $this->view->response($comentarios, 200);
     }
 

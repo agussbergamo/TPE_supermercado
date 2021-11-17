@@ -3,8 +3,8 @@
 
 <h2>{$title}</h2>
 
-{if $logged == false}
-  <form action="verify" method="post">
+{if $logged == "none"}
+  <form action="{$action}" method="post">
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
       <input type="text" name="usuario" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">

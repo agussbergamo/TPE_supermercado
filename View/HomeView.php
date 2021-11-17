@@ -10,9 +10,10 @@ class HomeView
         $this->smarty = new Smarty();
     }
 
-    function showHome()
+    function showHome($logged)
     {
         $this->smarty->assign("title", "¡Bienvenido!");
+        $this->smarty->assign("logged", $logged);
         $this->smarty->display("templates/home.tpl");
     }
 }

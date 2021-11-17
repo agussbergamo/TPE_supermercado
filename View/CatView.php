@@ -18,10 +18,11 @@ class CatView
         $this->smarty->display("templates/listCat.tpl");
     }
 
-    function showCategory($prodsByCat, $nom_cat)
+    function showCategory($prodsByCat, $nom_cat, $logged)
     {
         $this->smarty->assign("title", $nom_cat);
         $this->smarty->assign("products", $prodsByCat);
+        $this->smarty->assign("logged", $logged);
         $this->smarty->display("templates/detailCat.tpl");
     }
 

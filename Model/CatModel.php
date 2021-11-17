@@ -29,10 +29,10 @@ class CatModel
         return $prodsByCat;
     }
 
-    function addCat()
+    function addCat($nom_cat, $refrig)
     {
         $query = $this->db->prepare("INSERT INTO categoria (id_cat, nom_cat, refrig) VALUES (NULL, ?, ?)");
-        $query->execute(array($_POST["nom_cat"], $_POST["refrig"]));
+        $query->execute(array($nom_cat, $refrig));
     }
 
     function deleteCategory($id)

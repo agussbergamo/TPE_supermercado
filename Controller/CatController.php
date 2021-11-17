@@ -1,6 +1,5 @@
 <?php
 require_once "Model/CatModel.php";
-require_once "Model/ProdModel.php";
 require_once "View/CatView.php";
 require_once "Helpers/AuthHelper.php";
 
@@ -28,14 +27,15 @@ class CatController
 
     function viewCat($nom_cat)
     {
+        $logged = $this->authHelper->checkLoggedIn();
         $prodsByCat = $this->model->getCategory($nom_cat);
-        $this->view->showCategory($prodsByCat, $nom_cat);
+        $this->view->showCategory($prodsByCat, $nom_cat, $logged);
     }
 
     function addCat()
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == true) {
+        if ($logged == "admin") {
             if (isset($_POST["nom_cat"]) && isset($_POST["refrig"])) {
                 $this->model->addCat($_POST["nom_cat"], $_POST["refrig"]);
             }
@@ -48,7 +48,7 @@ class CatController
     function deleteCat($id)
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == true) {
+        if ($logged == "admin") {
             $this->model->deleteCategory($id);
             header("Location: " . BASE_URL . "listCat");
         } else {
@@ -59,7 +59,7 @@ class CatController
     function editCat($id_cat)
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == true) {
+        if ($logged == "admin") {
             $categoryFields = $this->model->getCategoryFields($id_cat);
             $this->view->showCategoryEdit($categoryFields);
         } else {
@@ -70,7 +70,7 @@ class CatController
     function submitEditCat($id)
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == true) {
+        if ($logged == "admin") {
             if (isset($_POST["nom_cat"]) && isset($_POST["refrig"])) {
                 $this->model->submitEditCat($id, $_POST["nom_cat"], $_POST["refrig"]);
             }

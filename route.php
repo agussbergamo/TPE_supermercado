@@ -1,9 +1,8 @@
 <?php
 require_once "Controller/ProdController.php";
 require_once "Controller/CatController.php";
-require_once "Controller/LoginController.php";
+require_once "Controller/UserController.php";
 require_once "Controller/HomeController.php";
-require_once "Controller/CommController.php";
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
@@ -17,9 +16,8 @@ $params = explode('/', $action);
 
 $prodController = new ProdController();
 $catController = new CatController();
-$loginController = new LoginController();
+$userController = new UserController();
 $homeController = new HomeController();
-$commController = new CommController();
 
 
 switch ($params[0]) {
@@ -63,13 +61,31 @@ switch ($params[0]) {
         $catController->submitEditCat($params[1]);
         break;    
     case 'login':
-        $loginController->login();
+        $userController->login();
         break;
     case 'verify':
-        $loginController->verifyLogin();
+        $userController->verifyLogin();
         break;
     case 'logout':
-        $loginController->logout($params[1]);
+        $userController->logout($params[1]);
+        break;
+    case 'regist':
+        $userController->regist();
+        break;
+    case 'submitRegist':
+        $userController->submitRegist();
+        break;
+    case 'settings':
+        $userController->settings();
+        break;
+    case 'deleteUser':
+        $userController->deleteUser($params[1]);
+        break;
+    case 'upgradeUser':
+        $userController->upgradeUser($params[1]);
+        break;
+    case 'downgradeUser':
+        $userController->downgradeUser($params[1]);
         break;
     default:
         echo ('404 page not found');

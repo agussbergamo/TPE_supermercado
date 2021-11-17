@@ -19,10 +19,15 @@ class ProdView
         $this->smarty->display("templates/listProd.tpl");
     }
 
-    function showProduct($product)
+    function showProduct($product, $logged)
     {
+
         $this->smarty->assign("product", $product);
-        $this->smarty->display("templates/detailProd.tpl");
+        if($logged){
+            $this->smarty->assign("rol", $logged["rol"]);
+            $this->smarty->assign("id_usuario", $logged["id_usuario"]);
+        }
+            $this->smarty->display("templates/detailProd.tpl");
     }
 
     function showProductEdit($product, $categories)
