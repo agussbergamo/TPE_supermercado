@@ -1,6 +1,6 @@
 {include file="templates/header.tpl"}
 
-<div id="producto" data-id="{$product->id_prod}" data-role="{$rol}" data-id_user="{$id_usuario}">
+<div id="producto" data-id="{$product->id_prod}" data-role="{$rol}">
 <h2>Detalle de producto</h2>
 <ul>
     <li> Producto: {$product->nom_prod}</li>
@@ -16,18 +16,22 @@
     {include file="templates/vue/comments.tpl"}
 </div>
 
-
-{IF ROL }
-SE MUESTRA EL form
-NO GENERAR UN TPL APARTE PARA EL form
-
-LUEGO, EL POST LE LLEGA A JS, QUE LO CODEA COMO JSON Y DEVUELVE
-
-!!! NO OLVIDAR CAMBIAR TODOS LOS CHECKLOGGEDIN PARA ADAPTARLOS A QUE AHORA $LOGGED ES UN ARREGLO SESSION COMPLETO
-
-<div id="commForm">
-    {include file="templates/vue/commForm.tpl"}
-</div>
+{if $rol == "user" || $rol == "admin"}
+<h2>Agregar comentario de producto</h2>
+  <form id="commForm">
+    <h5>Bienvenido</h5>
+    <p name="usuario">{$usuario}</p>
+    <div class="mb-3">
+      <label class="form-label">Comentario</label>
+      <input type="text" name="comentario" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Puntaje</label>
+      <input type="text" name="puntaje" class="form-control">
+    </div>
+    <input id="submit-comm" type="submit" class="btn btn-primary">
+  </form>
+{/if}
 
 </div>
 <script src="js/commentsCSR.js"></script>

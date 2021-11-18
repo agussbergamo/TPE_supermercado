@@ -13,7 +13,7 @@ class HomeView
     function showHome($logged)
     {
         $this->smarty->assign("title", "¡Bienvenido!");
-        $this->smarty->assign("logged", $logged);
+        $this->smarty->assign("rol", $logged["rol"]);
         $this->smarty->display("templates/home.tpl");
     }
 }

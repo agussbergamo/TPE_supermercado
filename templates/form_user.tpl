@@ -3,7 +3,7 @@
 
 <h2>{$title}</h2>
 
-{if $logged == "none"}
+{if $rol == "none"}
   <form action="{$action}" method="post">
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>

@@ -14,7 +14,7 @@ class CatView
     {
         $this->smarty->assign("title", "Lista de categorías");
         $this->smarty->assign("categories", $categories);
-        $this->smarty->assign("logged", $logged);
+        $this->smarty->assign("rol", $logged["rol"]);
         $this->smarty->display("templates/listCat.tpl");
     }
 
@@ -22,13 +22,14 @@ class CatView
     {
         $this->smarty->assign("title", $nom_cat);
         $this->smarty->assign("products", $prodsByCat);
-        $this->smarty->assign("logged", $logged);
+        $this->smarty->assign("rol", $logged["rol"]);
         $this->smarty->display("templates/detailCat.tpl");
     }
 
-    function showCategoryEdit($categoryFields)
+    function showCategoryEdit($categoryFields, $logged)
     {
         $this->smarty->assign("category", $categoryFields);
+        $this->smarty->assign("rol", $logged["rol"]);
         $this->smarty->display("templates/detailCatEdit.tpl");
     }
 }

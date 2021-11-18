@@ -22,9 +22,10 @@
                 <div class="col"><a href="regist/" class="btn btn-outline-primary">Registro</a></div>                
                 <div class="col"><a href="login/" class="btn btn-outline-primary">Login</a></div>
                 <div class="col"><a href="logout/" class="btn btn-outline-primary">Logout</a></div>
-                 {if $logged == "admin"}
+                 {if $rol == "admin"}
                     <div class="col"><a href="settings/" class="btn btn-outline-primary">Settings</a></div>
                  {/if}
             </div>
         </nav>
+
     </div>

@@ -35,7 +35,7 @@ class CatController
     function addCat()
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == "admin") {
+        if($logged["rol"] == "admin") {
             if (isset($_POST["nom_cat"]) && isset($_POST["refrig"])) {
                 $this->model->addCat($_POST["nom_cat"], $_POST["refrig"]);
             }
@@ -48,7 +48,7 @@ class CatController
     function deleteCat($id)
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == "admin") {
+        if($logged["rol"] == "admin") {
             $this->model->deleteCategory($id);
             header("Location: " . BASE_URL . "listCat");
         } else {
@@ -59,9 +59,9 @@ class CatController
     function editCat($id_cat)
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == "admin") {
+        if($logged["rol"] == "admin") {
             $categoryFields = $this->model->getCategoryFields($id_cat);
-            $this->view->showCategoryEdit($categoryFields);
+            $this->view->showCategoryEdit($categoryFields, $logged);
         } else {
             header("Location: " . BASE_URL . "home");
         }
@@ -70,7 +70,7 @@ class CatController
     function submitEditCat($id)
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == "admin") {
+        if($logged["rol"] == "admin") {
             if (isset($_POST["nom_cat"]) && isset($_POST["refrig"])) {
                 $this->model->submitEditCat($id, $_POST["nom_cat"], $_POST["refrig"]);
             }

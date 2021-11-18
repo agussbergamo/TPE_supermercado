@@ -20,7 +20,7 @@ class UserController
     function login()
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if(($logged) && ($logged["rol"] == "admin" || $logged["rol"] == "user")) {
+        if($logged["rol"] == "admin" || $logged["rol"] == "user") {
             $this->view->showForm("Estás logueado!", $logged, "Login", "verify");
         } else {
             $this->view->showForm("Logueate por favor", $logged, "Login", "verify");
@@ -38,8 +38,8 @@ class UserController
             if ($user && password_verify($contraseña, $user->contraseña)) {
 
                 session_start();
-                $_SESSION["rol"] = $user->rol; 
                 $_SESSION["usuario"] = $usuario;
+                $_SESSION["rol"] = $user->rol; 
                 $_SESSION["id_usuario"] = $user->id_usuario;
 
                 header("Location: " . BASE_URL . "listProd");
@@ -60,7 +60,7 @@ class UserController
     function regist()
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == "admin" || $logged == "user") {
+        if($logged["rol"] == "admin" || $logged["rol"] == "user") {
             $this->view->showForm("Ya estás registrado!", $logged, "Registro", "submitRegist");
         } else {
             $this->view->showForm("", $logged, "Registro", "submitRegist");
@@ -86,7 +86,7 @@ class UserController
 
     function settings(){
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == "admin") {
+        if($logged["rol"] == "admin") {
             $usuarios = $this->model->getUsers();
             $this->view->showUsers($usuarios, $logged);
         }
@@ -94,7 +94,7 @@ class UserController
 
     function deleteUser($id_usuario){
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == "admin") {
+        if($logged["rol"] == "admin") {
             $this->model->deleteUser($id_usuario);
             header("Location: " . BASE_URL . "settings");
         } else {
@@ -104,7 +104,7 @@ class UserController
 
     function upgradeUser($id_usuario){
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == "admin") {
+        if($logged["rol"] == "admin") {
             $this->model->updateUser($id_usuario, "admin");
             header("Location: " . BASE_URL . "settings");
         } else {
@@ -114,7 +114,7 @@ class UserController
 
     function downgradeUser($id_usuario){
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged == "admin") {
+        if($logged["rol"] == "admin") {
             $this->model->updateUser($id_usuario, "user");
             header("Location: " . BASE_URL . "settings");
         } else {

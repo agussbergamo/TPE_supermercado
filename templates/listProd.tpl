@@ -6,7 +6,7 @@
 {foreach from=$products item=$product}
     <li>
         <a class=fs-4 href="viewProd/{$product->id_prod}">{$product->nom_prod}</a> | Categoría: {$product->nom_cat}
-         {if $logged == "admin"}
+         {if $rol == "admin"}
             <a class="btn btn-outline-danger" href="deleteProd/{$product->id_prod}">Borrar</a>
             <a class="btn btn-outline-secondary" href="editProd/{$product->id_prod}">Editar</a>
         {/if}
@@ -14,7 +14,7 @@
 {/foreach}
 </ul>
 
- {if $logged == "admin"}
+ {if $rol == "admin"}
     <h3>Agregar producto</h3>
     <form action="addProd" method="post">
         <input type="text" placeholder="Producto" name="nom_prod" required class="form-control form-control-lg">

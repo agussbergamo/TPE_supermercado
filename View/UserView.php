@@ -12,14 +12,14 @@ class UserView {
     function showForm ($mensaje = "", $logged, $title, $action) {
         $this->smarty->assign("title", $title);
         $this->smarty->assign("mensaje", $mensaje);
-        $this->smarty->assign("logged", $logged);
+        $this->smarty->assign("rol", $logged["rol"]);
         $this->smarty->assign("action", $action);
         $this->smarty->display("templates/form_user.tpl");
     }
 
     function showUsers($usuarios, $logged){
         $this->smarty->assign("title", "Lista de usuarios");
-        $this->smarty->assign("logged", $logged);
+        $this->smarty->assign("rol", $logged["rol"]);
         $this->smarty->assign("usuarios", $usuarios);
         $this->smarty->display("templates/usersList.tpl");
     }

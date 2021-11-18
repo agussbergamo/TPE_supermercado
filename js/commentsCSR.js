@@ -11,7 +11,6 @@ let commList = new Vue ({
     }
 });
 
-
 async function getComments(){
     try{
         let response = await fetch(API_URL);

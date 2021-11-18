@@ -15,7 +15,7 @@ class ProdView
         $this->smarty->assign("title", "Lista de productos");
         $this->smarty->assign("products", $products);
         $this->smarty->assign("categories", $categories);
-        $this->smarty->assign("logged", $logged);
+        $this->smarty->assign("rol", $logged["rol"]);
         $this->smarty->display("templates/listProd.tpl");
     }
 
@@ -23,17 +23,20 @@ class ProdView
     {
 
         $this->smarty->assign("product", $product);
-        if($logged){
-            $this->smarty->assign("rol", $logged["rol"]);
-            $this->smarty->assign("id_usuario", $logged["id_usuario"]);
+        $this->smarty->assign("rol", $logged["rol"]);
+        if(!empty($logged["usuario"])){
+            $this->smarty->assign("usuario", $logged["usuario"]);
+        } else {
+            $this->smarty->assign("usuario", "");
         }
-            $this->smarty->display("templates/detailProd.tpl");
+        $this->smarty->display("templates/detailProd.tpl");
     }
 
-    function showProductEdit($product, $categories)
+    function showProductEdit($product, $categories, $logged)
     {
         $this->smarty->assign("product", $product);
         $this->smarty->assign("categories", $categories);
+        $this->smarty->assign("rol", $logged["rol"]);
         $this->smarty->display("templates/detailProdEdit.tpl");
     }
 }

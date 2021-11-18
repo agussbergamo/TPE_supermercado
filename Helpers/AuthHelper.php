@@ -23,7 +23,7 @@ class AuthHelper
         if (isset($_SESSION["rol"]))
             $session = $_SESSION;
         else
-            $session = null;
+            $session = array("rol"=>"none");
         return $session;
     }
 
