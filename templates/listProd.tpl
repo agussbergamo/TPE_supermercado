@@ -2,6 +2,21 @@
 
 <h2> {$title} </h2>
 
+ {if $rol == "admin" || $rol == "user" }
+    <h3>Filtrar producto</h3>
+    <form action="filtrarProd" method="post">
+        <select name="atributo" required class="form-control form-control-lg">
+            <option value="nom_prod">Nombre producto</option>
+            <option value="marca">Marca</option>
+            <option value="peso">Peso</option>
+            <option value="precio">Precio</option>
+        </select>
+        <input type="text" placeholder="Ingrese búsqueda" name="filtro" required class="form-control form-control-lg">
+        <input type="submit" class="btn btn-primary">
+    </form>
+        <a href="listProd" type="submit" class="btn btn-primary">Mostrar todo</a>
+{/if}
+
 <ul>
 {foreach from=$products item=$product}
     <li>

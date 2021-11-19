@@ -15,27 +15,40 @@ class ApiCommController
 
     function getComments($params = null)
     {
-        $id_producto = $params[":ID"];
-        $comentarios = $this->model->getComments($id_producto);
-        return $this->view->response($comentarios, 200);
+        $puntaje = $_GET["puntaje"];
+        //LO MISMO CON SORT Y ORDER. SE PASAN TODOS COMO PARÁMETRO AL MODEL.
+            $id_producto = $params[":ID"];
+            $comentarios = $this->model->getComments($id_producto);
+            return $this->view->response($comentarios, 200);
     }
 
-    /*
-    function addComment($params = null){
+    function addComment($params = null)
+    {
         $body = $this->getBody();
         //TODO: VALIDACIONES -> 400 BAD REQUEST
-        $id = $this->model->insertTask($body->titulo, $body->descripcion, $body->prioridad, false);
-        if($id != 0){
-            $this->view->response("La tarea se insertó con el id=$id", 200);
+        $id = $this->model->addComment($body->id_producto, $body->id_usuario, $body->comentario, $body->puntaje, $body->fecha);
+        if ($id != 0) {
+            $this->view->response("El comentario se insertó con el id=$id", 200);
         } else {
-            $this->view->response("La tarea no se pudo insertar", 500);
+            $this->view->response("El comentario no se pudo insertar", 500);
         }
     }
 
-    // Función para devolver el body del request
-    private function getBody() {
+    private function getBody()
+    {
         $bodyString = file_get_contents("php://input");
         return json_decode($bodyString);
     }
-*/
+
+    function deleteComment($params = null)
+    {
+        $id_comment = $params[":ID"];
+        $comment = $this->model->getComment($id_comment);
+        if ($comment) {
+            $this->model->deleteComment($id_comment);
+            return $this->view->response("El comentario con el id=$id_comment fue eliminado", 200);
+        } else {
+            return $this->view->response("El comentario con el id=$id_comment no existe", 404);
+        }
+    }
 }

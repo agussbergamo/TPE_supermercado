@@ -18,7 +18,7 @@
 
 {if $rol == "user" || $rol == "admin"}
 <h2>Agregar comentario de producto</h2>
-  <form id="commForm">
+  <form id="commForm" data-id_usuario="{$id_usuario}">
     <h5>Bienvenido</h5>
     <p name="usuario">{$usuario}</p>
     <div class="mb-3">
@@ -35,7 +35,6 @@
 
 </div>
 <script src="js/commentsCSR.js"></script>
-<script src="js/commFormCSR.js"></script>
 
 {include file="templates/footer.tpl"}
 

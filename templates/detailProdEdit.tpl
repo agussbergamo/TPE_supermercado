@@ -2,7 +2,7 @@
 
 <h2>Modificar producto</h2>
 
-<form action="submitEditProd/{$product->id_prod}" method="post">
+<form action="submitEditProd/{$product->id_prod}" method="post" enctype="multipart/form-data">
     <ul>
         <li> Producto: {$product->nom_prod}</li><input type="text" placeholder="Producto" name="nom_prod" value="{$product->nom_prod}" required class="form-control form-control-lg">
         <li> Categoría: {$product->nom_cat}</li><select name="id_cat" required class="form-control form-control-lg">
@@ -17,6 +17,7 @@
                                                                 <option value="ml" {if "ml" == $product->unidad_medida} selected {/if}>Mililitros</option>
                                                             </select>
         <li> Precio: {$product->precio}</li><input type="number" placeholder="Precio" name="precio" value="{$product->precio}" required class="form-control form-control-lg">
+        <li> Imagen: {$product->imagen}</li><input type="file" name="imagen" id="imageToUpload" required class="form-control form-control-lg">    
     </ul>
     <input type="submit" class="btn btn-primary">
 </form>

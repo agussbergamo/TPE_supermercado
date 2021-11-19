@@ -26,6 +26,7 @@ class ProdView
         $this->smarty->assign("rol", $logged["rol"]);
         if(!empty($logged["usuario"])){
             $this->smarty->assign("usuario", $logged["usuario"]);
+            $this->smarty->assign("id_usuario", $logged["id_usuario"]);
         } else {
             $this->smarty->assign("usuario", "");
         }

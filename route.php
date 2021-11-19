@@ -42,6 +42,9 @@ switch ($params[0]) {
     case 'submitEditProd':
         $prodController->submitEditProd($params[1]);
         break;
+    case 'filtrarProd':
+        $prodController->filterProd();
+        break;
     case 'listCat':
         $catController->listCat();
         break;

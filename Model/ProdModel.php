@@ -45,9 +45,23 @@ class ProdModel
         $query->execute(array($id));
     }
 
-    function submitEditProd($id, $nom_prod, $marca, $peso, $unidad_medida, $precio, $id_cat)
+    function submitEditProd($id, $nom_prod, $marca, $peso, $unidad_medida, $precio, $id_cat, $imagen = null)
     {
-        $query = $this->db->prepare("UPDATE producto SET nom_prod = ?, marca = ?, peso = ?, unidad_medida = ?, precio = ?, id_cat = ? WHERE id_prod = ?");
-        $query->execute(array($nom_prod, $marca, $peso, $unidad_medida, $precio, $id_cat, $id));
+        $filePath = "img/" . uniqid("", true) . ".". strtolower(pathinfo($imagen, PATHINFO_EXTENSION));
+        move_uploaded_file($imagen["input_name"], $filePath);       
+        $query = $this->db->prepare("UPDATE producto SET nom_prod = ?, marca = ?, peso = ?, unidad_medida = ?, precio = ?, id_cat = ?, imagen = ? WHERE id_prod = ?");
+        $query->execute(array($nom_prod, $marca, $peso, $unidad_medida, $precio, $id_cat, $filePath, $id));
     }
+
+    function filterProd($atributo, $filtro){
+        $query = $this->db->prepare("SELECT producto.*, categoria.nom_cat 
+                                    FROM producto LEFT JOIN categoria
+                                    ON producto.id_cat = categoria.id_cat
+                                    WHERE $atributo LIKE ?");
+        $query->execute(array("%$filtro%"));
+        $products = $query->fetchAll(PDO::FETCH_OBJ);
+        return $products;
+    }
+
+
 }
