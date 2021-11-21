@@ -9,7 +9,6 @@ $router = new Router();
 $router->addRoute('products/:ID/comments', 'GET', 'ApiCommController', 'getComments');
 $router->addRoute('products/:ID/comments', 'POST', 'ApiCommController', 'addComment');
 $router->addRoute('comments/:ID', 'DELETE', 'ApiCommController', 'deleteComment');
-$router->addRoute('products/:ID/comments', 'GET', 'ApiCommController', 'getComments');
 
 // rutea
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

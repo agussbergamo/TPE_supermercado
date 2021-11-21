@@ -96,30 +96,29 @@ class ProdController
                         $this->model->submitEditProd($id, $_POST["nom_prod"], $_POST["marca"], $_POST["peso"], $_POST["unidad_medida"], $_POST["precio"], $_POST["id_cat"]);
                     }*/
                     $this->model->submitEditProd($id, $_POST["nom_prod"], $_POST["marca"], $_POST["peso"], $_POST["unidad_medida"], $_POST["precio"], $_POST["id_cat"]);
-                    
+                }
+                header("Location: " . BASE_URL . "listCat");
+            } else {
+                header("Location: " . BASE_URL . "home");
             }
-            header("Location: " . BASE_URL . "listCat");
-        } else {
-            header("Location: " . BASE_URL . "home");
         }
     }
 
     function filterProd()
-    {
-        $logged = $this->authHelper->checkLoggedIn();
-        if ($logged["rol"] == "admin" || $logged["rol" == "user"]) {
-            if (
-                !empty($_POST["atributo"]) && !empty($_POST["filtro"])
-            ) {
-                //AGREGAR CHEQUEO DE VARIABLE ATRIBUTO
-                $prodFiltrados = $this->model->filterProd($_POST["atributo"], $_POST["filtro"]);
-                if ($prodFiltrados) {
-                    $categories = $this->catModel->getCategories();
-                    $this->view->showProducts($prodFiltrados, $categories, $logged);
-                } else {
-                    header("Location: " . BASE_URL . "home");
+        {
+            $logged = $this->authHelper->checkLoggedIn();
+            if ($logged["rol"] == "admin" || $logged["rol" == "user"]) {
+                if (!empty($_POST["atributo"]) && !empty($_POST["filtro"]) && ($_POST["atributo"] == "nom_prod"
+                || $_POST["atributo"] == "marca" || $_POST["atributo"] == "peso" || $_POST["atributo"] == "precio")) {
+                    $prodFiltrados = $this->model->filterProd($_POST["atributo"], $_POST["filtro"]);
+                    if ($prodFiltrados) {
+                        $categories = $this->catModel->getCategories();
+                        $this->view->showProducts($prodFiltrados, $categories, $logged);
+                    } else {
+                        header("Location: " . BASE_URL . "home");
+                    }
                 }
             }
         }
+
     }
-}
