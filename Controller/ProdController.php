@@ -21,12 +21,14 @@ class ProdController
         $this->authHelper = new AuthHelper();
     }
 
-    function listProd()
+    function listProd($logged = null, $mensaje = null)
     {
-        $logged = $this->authHelper->checkLoggedIn();
+        if(!isset($logged)){
+            $logged = $this->authHelper->checkLoggedIn();
+        }
         $products = $this->model->getProducts();
         $categories = $this->catModel->getCategories();
-        $this->view->showProducts($products, $categories, $logged);
+        $this->view->showProducts($products, $categories, $logged, $mensaje);
     }
 
     function viewProd($id)
@@ -42,16 +44,33 @@ class ProdController
         $logged = $this->authHelper->checkLoggedIn();
         if ($logged["rol"] == "admin") {
             if (
-                !empty($_POST["nom_prod"]) && !empty($_POST["marca"]) && !empty($_POST["peso"]) && !empty($_POST["unidad_medida"])
-                && !empty($_POST["precio"]) && !empty($_POST["id_cat"])
+                !empty($_POST["nom_prod"]) && !empty($_POST["marca"]) && !empty($_POST["peso"])
+                && !empty($_POST["unidad_medida"]) && !empty($_POST["precio"]) && !empty($_POST["id_cat"])
             ) {
-                $this->model->addProduct($_POST["nom_prod"], $_POST["marca"], $_POST["peso"], $_POST["unidad_medida"], $_POST["precio"], $_POST["id_cat"]);
+                if (!empty($_FILES["input_name"]["name"])) {
+                    if (($_FILES["input_name"]["type"] == "image/jpg" ||
+                        $_FILES["input_name"]["type"] == "image/jpeg" ||
+                        $_FILES["input_name"]["type"] == "image/png")) {
+                            $nombre_archivo = ($_FILES["input_name"]["name"]);
+                            $ruta_temporal = ($_FILES["input_name"]["tmp_name"]);
+                            $this->model->addProduct($_POST["nom_prod"], $_POST["marca"], $_POST["peso"], $_POST["unidad_medida"], $_POST["precio"], $_POST["id_cat"], $nombre_archivo, $ruta_temporal);
+                            header("Location: " . BASE_URL . "listProd");
+                    } else {
+                        $this->listProd($logged, "Formato de imagen no válido.");
+                        header("Location: " . BASE_URL . "listProd");
+                    }
+                } else {
+                    $this->model->addProduct($_POST["nom_prod"], $_POST["marca"], $_POST["peso"], $_POST["unidad_medida"], $_POST["precio"], $_POST["id_cat"]);
+                    header("Location: " . BASE_URL . "listProd");
+                }
+            } else {
+                header("Location: " . BASE_URL . "listProd"); 
             }
-            header("Location: " . BASE_URL . "listProd");
         } else {
             header("Location: " . BASE_URL . "home");
         }
     }
+
 
     function deleteProd($id)
     {
@@ -64,13 +83,15 @@ class ProdController
         }
     }
 
-    function editProd($id)
+    function editProd($id, $logged = null, $mensaje = null)
     {
-        $logged = $this->authHelper->checkLoggedIn();
+        if(!isset($logged)){
+            $logged = $this->authHelper->checkLoggedIn();
+        }
         if ($logged["rol"] == "admin") {
             $product = $this->model->getProduct($id);
             $categories = $this->catModel->getCategories();
-            $this->view->showProductEdit($product, $categories, $logged);
+            $this->view->showProductEdit($product, $categories, $logged, $mensaje);
         } else {
             header("Location: " . BASE_URL . "home");
         }
@@ -78,54 +99,50 @@ class ProdController
 
     function submitEditProd($id)
     {
-       $logged = $this->authHelper->checkLoggedIn();
-        $nombre_archivo = ($_FILES["input_name"]["name"]);
-        $ruta_temporal = ($_FILES["input_name"]["tmp_name"]);
-       $this->model->submitEditProd($id, $_POST["nom_prod"], $_POST["marca"], $_POST["peso"], $_POST["unidad_medida"], $_POST["precio"], $_POST["id_cat"], $nombre_archivo, $ruta_temporal);
-       header("Location: " . BASE_URL . "listProd");
-        /*if ($logged["rol"] == "admin") {
+        $logged = $this->authHelper->checkLoggedIn();
+        if ($logged["rol"] == "admin") {
             if (
                 !empty($_POST["nom_prod"]) && !empty($_POST["marca"]) && !empty($_POST["peso"])
                 && !empty($_POST["unidad_medida"]) && !empty($_POST["precio"]) && !empty($_POST["id_cat"])
             ) {
-                if (!empty($_FILES)) {
+                if (!empty($_FILES["input_name"]["name"])) {
                     if (($_FILES["input_name"]["type"] == "image/jpg" ||
                         $_FILES["input_name"]["type"] == "image/jpeg" ||
                         $_FILES["input_name"]["type"] == "image/png")) {
-                        //$file = $_FILES["input_name"]["name"];
-                        //$temp_file = $_FILES["input_name"]["tmp_name"];
-                        $this->model->submitEditProd($id, $_POST["nom_prod"], $_POST["marca"], $_POST["peso"], $_POST["unidad_medida"], $_POST["precio"], $_POST["id_cat"], $_FILES);
-                    }// else {
-                           // "qué pasa si el formato no es correcto";
-                       // }
+                            $nombre_archivo = ($_FILES["input_name"]["name"]);
+                            $ruta_temporal = ($_FILES["input_name"]["tmp_name"]);
+                            $this->model->submitEditProd($id, $_POST["nom_prod"], $_POST["marca"], $_POST["peso"], $_POST["unidad_medida"], $_POST["precio"], $_POST["id_cat"], $nombre_archivo, $ruta_temporal);
+                            header("Location: " . BASE_URL . "viewProd/$id");
                     } else {
-                        $this->model->submitEditProd($id, $_POST["nom_prod"], $_POST["marca"], $_POST["peso"], $_POST["unidad_medida"], $_POST["precio"], $_POST["id_cat"]);
+                        $this->editProd($id, $logged, "Formato de imagen no válido.");
+                        header("Location: " . BASE_URL . "viewProd/$id");
                     }
+                } else {
                     $this->model->submitEditProd($id, $_POST["nom_prod"], $_POST["marca"], $_POST["peso"], $_POST["unidad_medida"], $_POST["precio"], $_POST["id_cat"]);
+                    header("Location: " . BASE_URL . "viewProd/$id");
                 }
-                header("Location: " . BASE_URL . "listCat");
             } else {
-                header("Location: " . BASE_URL . "home");
-            }*/
+                header("Location: " . BASE_URL . "viewProd/$id"); 
+            }
+        } else {
+            header("Location: " . BASE_URL . "home");
         }
-        
-    
+    }
 
     function filterProd()
-        {
-            $logged = $this->authHelper->checkLoggedIn();
-            if ($logged["rol"] == "admin" || $logged["rol" == "user"]) {
-                if (!empty($_POST["atributo"]) && !empty($_POST["filtro"]) && ($_POST["atributo"] == "nom_prod"
+    {
+        $logged = $this->authHelper->checkLoggedIn();
+        if ($logged["rol"] == "admin" || $logged["rol" == "user"]) {
+            if (!empty($_POST["atributo"]) && !empty($_POST["filtro"]) && ($_POST["atributo"] == "nom_prod"
                 || $_POST["atributo"] == "marca" || $_POST["atributo"] == "peso" || $_POST["atributo"] == "precio")) {
-                    $prodFiltrados = $this->model->filterProd($_POST["atributo"], $_POST["filtro"]);
-                    if ($prodFiltrados) {
-                        $categories = $this->catModel->getCategories();
-                        $this->view->showProducts($prodFiltrados, $categories, $logged);
-                    } else {
-                        header("Location: " . BASE_URL . "home");
-                    }
+                $prodFiltrados = $this->model->filterProd($_POST["atributo"], $_POST["filtro"]);
+                if ($prodFiltrados) {
+                    $categories = $this->catModel->getCategories();
+                    $this->view->showProducts($prodFiltrados, $categories, $logged);
+                } else {
+                    header("Location: " . BASE_URL . "home");
                 }
             }
         }
-
     }
+}

@@ -10,12 +10,13 @@ class ProdView
         $this->smarty = new Smarty();
     }
 
-    function showProducts($products, $categories, $logged)
+    function showProducts($products, $categories, $logged, $mensaje = null)
     {
         $this->smarty->assign("title", "Lista de productos");
         $this->smarty->assign("products", $products);
         $this->smarty->assign("categories", $categories);
         $this->smarty->assign("rol", $logged["rol"]);
+        $this->smarty->assign("mensajeError", $mensaje);
         $this->smarty->display("templates/listProd.tpl");
     }
 
@@ -33,11 +34,12 @@ class ProdView
         $this->smarty->display("templates/detailProd.tpl");
     }
 
-    function showProductEdit($product, $categories, $logged)
+    function showProductEdit($product, $categories, $logged, $mensaje = null)
     {
         $this->smarty->assign("product", $product);
         $this->smarty->assign("categories", $categories);
         $this->smarty->assign("rol", $logged["rol"]);
+        $this->smarty->assign("mensajeError", $mensaje);
         $this->smarty->display("templates/detailProdEdit.tpl");
     }
 }

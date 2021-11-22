@@ -31,7 +31,7 @@
 
  {if $rol == "admin"}
     <h3>Agregar producto</h3>
-    <form action="addProd" method="post">
+    <form action="addProd" method="post" enctype="multipart/form-data">
         <input type="text" placeholder="Producto" name="nom_prod" required class="form-control form-control-lg">
         <input type="text" placeholder="Marca" name="marca" required class="form-control form-control-lg">
         <input type="number" placeholder="Peso" name="peso" required class="form-control form-control-lg">
@@ -45,6 +45,8 @@
                 <option value="{$category->id_cat}">{$category->nom_cat}</option>
             {/foreach})
         </select>
+        <input id="btn-imagen" type="file" name="input_name" id="imageToUpload" class="form-control form-control-lg">    
+        <p>{$mensajeError}</p>
         <input type="submit" class="btn btn-primary">
     </form>
 {/if}

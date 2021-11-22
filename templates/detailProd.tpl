@@ -1,14 +1,18 @@
 {include file="templates/header.tpl"}
 
-<div id="producto" data-id="{$product->id_prod}" data-role="{$rol}">
-<h2>Detalle de producto</h2>
-<ul>
-    <li> Producto: {$product->nom_prod}</li>
-    <li> Categoría: {$product->nom_cat}</li>
-    <li> Marca: {$product->marca}</li>
-    <li> Peso: {$product->peso} {$product->unidad_medida}</li>
-    <li> Precio: {$product->precio}</li>
-</ul>
+<div class="card bg-primary p-2 text-black bg-opacity-50" style="width: 18rem;" id="producto" data-id="{$product->id_prod}" data-role="{$rol}">
+  <img class="card-img-top" src="{$product->imagen}">
+  <div class="card-body">
+    <h5 class="card-title">Detalle de producto</h5>
+    <ul>
+        <li> Producto: {$product->nom_prod}</li>
+        <li> Categoría: {$product->nom_cat}</li>
+        <li> Marca: {$product->marca}</li>
+        <li> Peso: {$product->peso} {$product->unidad_medida}</li>
+        <li> Precio: {$product->precio}</li>
+    </ul>
+  </div>
+</div>
 
 <a href="listProd" class="btn btn-outline-primary"> Volver </a>
 

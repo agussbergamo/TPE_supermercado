@@ -64,18 +64,6 @@ let commList = new Vue({
     }
   }
 });
-/*
-async function getComments() {
-  try {
-    let response = await fetch(API_URL);
-    let comentarios = await response.json();
-    commList.comentarios = comentarios;
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-getComments();*/
 
 document.querySelector("#submit-comm").addEventListener("click", postComment);
 
