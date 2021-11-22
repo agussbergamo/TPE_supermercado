@@ -11,6 +11,9 @@ let commList = new Vue({
     comentarios: [],
     rol: user_role,
   },
+  mounted: function(){
+    this.getComm();
+  },
   methods: {
     filter: async function (event) {
       event.preventDefault();
@@ -49,10 +52,19 @@ let commList = new Vue({
       } catch (error) {
         console.log(error);
       }
+    },
+    getComm: async function () {
+      try {
+        let response = await fetch(API_URL);
+        let comentarios = await response.json();
+        commList.comentarios = comentarios;
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
 });
-
+/*
 async function getComments() {
   try {
     let response = await fetch(API_URL);
@@ -63,7 +75,7 @@ async function getComments() {
   }
 }
 
-getComments();
+getComments();*/
 
 document.querySelector("#submit-comm").addEventListener("click", postComment);
 

@@ -17,7 +17,7 @@
                                                                 <option value="ml" {if "ml" == $product->unidad_medida} selected {/if}>Mililitros</option>
                                                             </select>
         <li> Precio: {$product->precio}</li><input type="number" placeholder="Precio" name="precio" value="{$product->precio}" required class="form-control form-control-lg">
-        <li> Imagen: {$product->imagen}</li><input type="file" name="imagen" id="imageToUpload" required class="form-control form-control-lg">    
+        <li> Imagen: {$product->imagen}</li><input type="file" name="input_name" id="imageToUpload" required class="form-control form-control-lg">    
     </ul>
     <input type="submit" class="btn btn-primary">
 </form>

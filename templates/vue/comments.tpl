@@ -14,6 +14,7 @@
     </select>
     <input v-on:click="filter" type="submit" class="btn btn-primary">
 </form>
+    <a v-on:click="getComm" class="btn btn-primary">Mostrar todos</a>
 
 <h3> Ordenar por </h3>
 

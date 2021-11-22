@@ -10,17 +10,28 @@ class CommModel
         $this->db = new PDO('mysql:host=localhost;' . 'dbname=db_supermercado;charset=utf8', 'root', '');
     }
 
-    function getComments($id_producto, $puntaje, $atributo, $criterio)
+    function getComments($id_producto, $atributo, $criterio)
     {
         $query = $this->db->prepare("SELECT comentarios.*, usuario.usuario FROM comentarios LEFT JOIN usuario
                                     ON comentarios.id_usuario = usuario.id_usuario
-                                    WHERE id_producto = ? AND puntaje = $puntaje
+                                    WHERE id_producto = ?
                                     ORDER BY $atributo $criterio");
         $query->execute(array($id_producto));
         $comentarios = $query->fetchAll(PDO::FETCH_OBJ);
         return $comentarios;
     }
 
+    function getCommentsByPuntaje($id_producto, $puntaje, $atributo, $criterio)
+    {
+        $query = $this->db->prepare("SELECT comentarios.*, usuario.usuario FROM comentarios LEFT JOIN usuario
+                                    ON comentarios.id_usuario = usuario.id_usuario
+                                    WHERE id_producto = ? AND puntaje = ?
+                                    ORDER BY $atributo $criterio");
+        $query->execute(array($id_producto, $puntaje));
+        $comentarios = $query->fetchAll(PDO::FETCH_OBJ);
+        return $comentarios;
+    }
+    
     function getComment($id)
     {
         $query = $this->db->prepare("SELECT * FROM comentarios WHERE id = ?");

@@ -15,12 +15,6 @@ class ApiCommController
 
     function getComments($params = null)
     {
-        //setea el 1 por defecto
-        if(isset($_GET["puntaje"])){
-            $puntaje = $_GET["puntaje"];
-        } else {
-            $puntaje = true;
-        }
         if(isset($_GET["sort"]) && isset($_GET["order"])){
             $atributo = $_GET["sort"];
             $criterio = $_GET["order"];
@@ -28,9 +22,15 @@ class ApiCommController
             $atributo = "puntaje";
             $criterio = "asc";
         }
-            $id_producto = $params[":ID"];
-            $comentarios = $this->model->getComments($id_producto, $puntaje, $atributo, $criterio);
-            return $this->view->response($comentarios, 200);
+        $id_producto = $params[":ID"];
+        $puntaje = null;
+        if(isset($_GET["puntaje"])){
+            $puntaje = $_GET["puntaje"];
+            $comentarios = $this->model->getCommentsByPuntaje($id_producto, $puntaje, $atributo, $criterio);
+        } else {
+            $comentarios = $this->model->getComments($id_producto, $atributo, $criterio);
+        }
+        return $this->view->response($comentarios, 200);
     }
 
     function addComment($params = null)

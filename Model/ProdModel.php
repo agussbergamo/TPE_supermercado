@@ -45,10 +45,10 @@ class ProdModel
         $query->execute(array($id));
     }
 
-    function submitEditProd($id, $nom_prod, $marca, $peso, $unidad_medida, $precio, $id_cat, $imagen = null)
+    function submitEditProd($id, $nom_prod, $marca, $peso, $unidad_medida, $precio, $id_cat, $nombre_archivo = null, $ruta_temporal)
     {
-        $filePath = "img/" . uniqid("", true) . ".". strtolower(pathinfo($imagen, PATHINFO_EXTENSION));
-        move_uploaded_file($imagen["input_name"], $filePath);       
+        $filePath = "img/" . uniqid("", true) . ".". strtolower(pathinfo($nombre_archivo, PATHINFO_EXTENSION));
+        move_uploaded_file($ruta_temporal, $filePath);       
         $query = $this->db->prepare("UPDATE producto SET nom_prod = ?, marca = ?, peso = ?, unidad_medida = ?, precio = ?, id_cat = ?, imagen = ? WHERE id_prod = ?");
         $query->execute(array($nom_prod, $marca, $peso, $unidad_medida, $precio, $id_cat, $filePath, $id));
     }
