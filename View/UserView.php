@@ -13,6 +13,11 @@ class UserView {
         $this->smarty->assign("title", $title);
         $this->smarty->assign("mensaje", $mensaje);
         $this->smarty->assign("rol", $logged["rol"]);
+        if(!empty($logged["usuario"])){
+            $this->smarty->assign("usuario", $logged["usuario"]);
+        } else {
+            $this->smarty->assign("usuario", "");
+        }
         $this->smarty->assign("action", $action);
         $this->smarty->display("templates/form_user.tpl");
     }
@@ -20,6 +25,12 @@ class UserView {
     function showUsers($usuarios, $logged){
         $this->smarty->assign("title", "Lista de usuarios");
         $this->smarty->assign("rol", $logged["rol"]);
+        if(!empty($logged["usuario"])){
+            $this->smarty->assign("usuario", $logged["usuario"]);
+        } else {
+            $this->smarty->assign("usuario", "");
+        }
+        $this->smarty->assign("usuario_registrado", $logged["id_usuario"]);
         $this->smarty->assign("usuarios", $usuarios);
         $this->smarty->display("templates/usersList.tpl");
     }

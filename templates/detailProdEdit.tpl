@@ -1,6 +1,8 @@
 {include file="templates/header.tpl"}
 
-<h2>Modificar producto</h2>
+<div class="text-center">
+    <h1 class="display-2"> Modificar producto </h1>
+</div>
 
 <form action="submitEditProd/{$product->id_prod}" method="post" enctype="multipart/form-data">
     <ul>

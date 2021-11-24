@@ -1,10 +1,5 @@
 {include file="templates/header.tpl"}
 
-
-<div class="container">
-    <div class="row justify-content-center">
-    <h1 class="text-center">{$title}</h1> 
-    </div>
-</div>
+<img src="img/bg-super.png" width="100%" class="fixed-bottom">
 
 {include file="templates/footer.tpl"}

@@ -32,7 +32,6 @@ class UserController
         if (!empty($_POST["usuario"]) && !empty($_POST["contraseña"])) {
             $usuario = $_POST["usuario"];
             $contraseña = $_POST["contraseña"];
-
             $user = $this->model->getUser($usuario);
 
             if ($user && password_verify($contraseña, $user->contraseña)) {

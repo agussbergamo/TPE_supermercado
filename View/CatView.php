@@ -15,6 +15,11 @@ class CatView
         $this->smarty->assign("title", "Lista de categorías");
         $this->smarty->assign("categories", $categories);
         $this->smarty->assign("rol", $logged["rol"]);
+        if(!empty($logged["usuario"])){
+            $this->smarty->assign("usuario", $logged["usuario"]);
+        } else {
+            $this->smarty->assign("usuario", "");
+        }
         $this->smarty->display("templates/listCat.tpl");
     }
 
@@ -23,6 +28,11 @@ class CatView
         $this->smarty->assign("title", $nom_cat);
         $this->smarty->assign("products", $prodsByCat);
         $this->smarty->assign("rol", $logged["rol"]);
+        if(!empty($logged["usuario"])){
+            $this->smarty->assign("usuario", $logged["usuario"]);
+        } else {
+            $this->smarty->assign("usuario", "");
+        }
         $this->smarty->display("templates/detailCat.tpl");
     }
 
@@ -30,6 +40,11 @@ class CatView
     {
         $this->smarty->assign("category", $categoryFields);
         $this->smarty->assign("rol", $logged["rol"]);
+        if(!empty($logged["usuario"])){
+            $this->smarty->assign("usuario", $logged["usuario"]);
+        } else {
+            $this->smarty->assign("usuario", "");
+        }
         $this->smarty->display("templates/detailCatEdit.tpl");
     }
 }

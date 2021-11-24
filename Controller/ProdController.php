@@ -132,7 +132,7 @@ class ProdController
     function filterProd()
     {
         $logged = $this->authHelper->checkLoggedIn();
-        if ($logged["rol"] == "admin" || $logged["rol" == "user"]) {
+        if ($logged["rol"] == "admin" || $logged["rol"] == "user") {
             if (!empty($_POST["atributo"]) && !empty($_POST["filtro"]) && ($_POST["atributo"] == "nom_prod"
                 || $_POST["atributo"] == "marca" || $_POST["atributo"] == "peso" || $_POST["atributo"] == "precio")) {
                 $prodFiltrados = $this->model->filterProd($_POST["atributo"], $_POST["filtro"]);
@@ -140,7 +140,7 @@ class ProdController
                     $categories = $this->catModel->getCategories();
                     $this->view->showProducts($prodFiltrados, $categories, $logged);
                 } else {
-                    header("Location: " . BASE_URL . "home");
+                    header("Location: " . BASE_URL . "listProd");
                 }
             }
         }

@@ -1,41 +1,34 @@
 {include file="templates/header.tpl"}
 
-<div class="card bg-primary p-2 text-black bg-opacity-50" style="width: 18rem;" id="producto" data-id="{$product->id_prod}" data-role="{$rol}">
-  <img class="card-img-top" src="{$product->imagen}">
-  <div class="card-body">
-    <h5 class="card-title">Detalle de producto</h5>
-    <ul>
-        <li> Producto: {$product->nom_prod}</li>
-        <li> Categoría: {$product->nom_cat}</li>
-        <li> Marca: {$product->marca}</li>
-        <li> Peso: {$product->peso} {$product->unidad_medida}</li>
-        <li> Precio: {$product->precio}</li>
-    </ul>
-  </div>
+
+<div class="text-center">
+    <h1 class="display-2"> Detalle de producto </h1>
 </div>
 
-<a href="listProd" class="btn btn-outline-primary"> Volver </a>
+<div class="d-flex justify-content-center">
+  <div class="card bg-primary p-2 text-black bg-opacity-50" style="width: 18rem;" id="producto" data-id="{$product->id_prod}" data-role="{$rol}" data-id_usuario="{$id_usuario}">
+    <img class="card-img-top" src="{$product->imagen}" alt="El producto no posee imagen.">
+    <div class="card-body">
+      <ul>
+          <li> Producto: {$product->nom_prod}</li>
+          <li> Categoría: {$product->nom_cat}</li>
+          <li> Marca: {$product->marca}</li>
+          <li> Peso: {$product->peso} {$product->unidad_medida}</li>
+          <li> Precio: {$product->precio}</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="d-flex justify-content-center">
+  <a href="listProd" class="btn btn-outline-primary align-text-center"> Volver </a>
+</div>
+
 
 <div id="commList">
     {include file="templates/vue/comments.tpl"}
 </div>
-
-{if $rol == "user" || $rol == "admin"}
-<h2>Agregar comentario de producto</h2>
-  <form id="commForm" data-id_usuario="{$id_usuario}">
-    <h5>Bienvenido</h5>
-    <p name="usuario">{$usuario}</p>
-    <div class="mb-3">
-      <label class="form-label">Comentario</label>
-      <input type="text" name="comentario" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Puntaje</label>
-      <input type="text" name="puntaje" class="form-control">
-    </div>
-    <input id="submit-comm" type="submit" class="btn btn-primary">
-  </form>
-{/if}
 
 </div>
 <script src="js/commentsCSR.js"></script>
